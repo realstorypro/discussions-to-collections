@@ -13,8 +13,12 @@ def lambda_handler(event:, context:)
 
     end
 
+    # request_body = {
+    #   name: 'discussions',
+    #   data: discussions
+    # }
+
     request_body = {
-      name: 'discussions',
       data: discussions
     }
 
