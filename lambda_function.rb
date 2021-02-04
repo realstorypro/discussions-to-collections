@@ -13,8 +13,12 @@ def lambda_handler(event:, context:)
 
     end
 
+    # request_body = {
+    #   name: 'discussions',
+    #   data: discussions
+    # }
+
     request_body = {
-      name: 'discussions',
       data: discussions
     }
 
@@ -26,10 +30,7 @@ def lambda_handler(event:, context:)
 
     )
 
-    puts ENV['API_KEY'], rsp
-
-
     { statusCode: 200, body: discussions.to_json }
 end
 
-lambda_handler(event: 'hi', context: 'bye')
+#lambda_handler(event: 'hi', context: 'bye')
