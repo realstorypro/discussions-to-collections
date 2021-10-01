@@ -2,7 +2,8 @@
 
 0. Install Gems to Vendor
 ```bash
- bundle install --path vendor/bundle   
+ bundle config set --local path 'vendor/bundle'
+ bundle
 ```
 
 1. Zip it UP
