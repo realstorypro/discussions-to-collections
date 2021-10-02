@@ -32,8 +32,6 @@ def lambda_handler(event:, context:)
 
     )
 
-    puts rsp
-
     { statusCode: 200, body: discussions.to_json }
 end
 
