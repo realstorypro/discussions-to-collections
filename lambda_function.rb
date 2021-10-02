@@ -13,6 +13,8 @@ def lambda_handler(event:, context:)
 
     end
 
+    discussions.shuffle!
+
     # request_body = {
     #   name: 'discussions',
     #   data: discussions
@@ -23,14 +25,14 @@ def lambda_handler(event:, context:)
     }
 
     rsp = HTTParty.put('https://beta-api.customer.io/v1/api/collections/1',
-        body: request_body.to_json,
-        headers: {
-            "Authorization" => "Bearer #{ENV['API_KEY']}"
-        }
+                       body: request_body.to_json,
+                       headers: {
+                           "Authorization" => "Bearer #{ENV['API_KEY']}"
+                       }
 
     )
 
     { statusCode: 200, body: discussions.to_json }
 end
 
-#lambda_handler(event: 'hi', context: 'bye')
+# lambda_handler(event: 'hi', context: 'bye')
