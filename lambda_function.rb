@@ -25,7 +25,6 @@ def lambda_handler(event:, context:)
     }
 
     rsp = HTTParty.put('https://beta-api.customer.io/v1/api/collections/1',
-                       verify: false,
                        body: request_body.to_json,
                        headers: {
                            "Authorization" => "Bearer #{ENV['API_KEY']}"
