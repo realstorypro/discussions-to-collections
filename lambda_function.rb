@@ -1,9 +1,10 @@
 require 'json'
 require 'httparty'
 require 'dotenv/load'
+# require 'byebug'
 
 def lambda_handler(event:, context:)
-    response = HTTParty.get('https://pub.storypro.io/feed.json')
+    response = HTTParty.get('https://www.nextweb.art/feed.json')
     entries = JSON.parse(response.body)['entries']
 
     discussions = []
@@ -13,7 +14,15 @@ def lambda_handler(event:, context:)
 
     end
 
+    # 1. get the most recent discussion
+    recent_discussions = discussions.shift(1)
+
+    # 2. shuffle the remaining discussions
     discussions.shuffle!
+
+    # 3. push the 4 discussions to shuffled discussions
+    recent_discussions.push *discussions.shift(4)
+
 
     # request_body = {
     #   name: 'discussions',
@@ -21,7 +30,7 @@ def lambda_handler(event:, context:)
     # }
 
     request_body = {
-      data: discussions
+      data: recent_discussions
     }
 
     rsp = HTTParty.put('https://beta-api.customer.io/v1/api/collections/1',
@@ -32,7 +41,7 @@ def lambda_handler(event:, context:)
 
     )
 
-    { statusCode: 200, body: discussions.to_json }
+    { statusCode: 200, body: recent_discussions.to_json }
 end
 
 # lambda_handler(event: 'hi', context: 'bye')
